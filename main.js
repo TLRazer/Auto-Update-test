@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Notification, autoUpdater } = require('electron');
+require('update-electron-app')();
 const path = require('path');
 const server = 'https://github.com/TLRazer/Auto-Update-test'
 const url = `${server}/update/${process.platform}/${app.getVersion()}`
@@ -55,7 +56,7 @@ const createWindow = () => {
       detail:
         'A new version has been downloaded. Restart the application to apply the updates.',
     }
-
+    autoUpdater.quitAndInstall();
     showNotification();
   
     dialog.showMessageBox(dialogOpts).then((returnValue) => {
