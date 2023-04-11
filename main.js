@@ -1,18 +1,21 @@
-const { app, BrowserWindow, Notification, autoUpdater } = require('electron');
+const { app, BrowserWindow, Notification } = require('electron');
+
+const { autoUpdater } = require("electron-updater")
+
 require('update-electron-app')();
 const path = require('path');
 const server = 'https://github.com/TLRazer/Auto-Update-test'
 const url = `${server}/update/${process.platform}/${app.getVersion()}`
 
-autoUpdater.setFeedURL({ url })
+//autoUpdater.setFeedURL({ url })
 
 setInterval(() => {
   showNotification();
-  autoUpdater.checkForUpdates()
-}, 60000)
+  console.log(autoUpdater.checkForUpdates());
+}, 15000)
 
-autoUpdater.autoDownload = false;
-autoUpdater.autoInstallOnAppQuit = true;
+//autoUpdater.autoDownload = false;
+//autoUpdater.autoInstallOnAppQuit = true;
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -23,7 +26,7 @@ const createWindow = () => {
       }
     })
   
-    win.loadFile('index.html')
+    win.loadFile('index.html');
   };
 
   const NOTIFICATION_TITLE = 'Auto update version : ';
