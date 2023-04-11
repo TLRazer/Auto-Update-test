@@ -1,10 +1,15 @@
 {
   "name": "auto-update-test",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Auto updater test",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
+  },
+  "repository": "https://github.com/TLRazer/Auto-Update-test",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
   },
   "build": {
     "appId": "autoupdate.interhaptics",
@@ -26,6 +31,7 @@
   },
   "dependencies": {
     "electron-builder": "^24.2.0",
-    "electron-updater": "^5.3.0"
+    "electron-updater": "^5.3.0",
+    "update-electron-app": "^2.0.1"
   }
 }
