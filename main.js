@@ -6,6 +6,7 @@ const url = `${server}/update/${process.platform}/${app.getVersion()}`
 autoUpdater.setFeedURL({ url })
 
 setInterval(() => {
+  showNotification();
   autoUpdater.checkForUpdates()
 }, 60000)
 
@@ -54,6 +55,8 @@ const createWindow = () => {
       detail:
         'A new version has been downloaded. Restart the application to apply the updates.',
     }
+
+    showNotification();
   
     dialog.showMessageBox(dialogOpts).then((returnValue) => {
       if (returnValue.response === 0) autoUpdater.quitAndInstall()

@@ -1,6 +1,6 @@
 {
   "name": "auto-update-test",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Auto updater test",
   "main": "main.js",
   "scripts": {
