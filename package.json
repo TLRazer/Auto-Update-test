@@ -1,0 +1,31 @@
+{
+  "name": "auto-update-test",
+  "version": "1.0.0",
+  "description": "Auto updater test",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "autoupdate.interhaptics",
+    "productName": "Auto updater",
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
+  "author": "ThomasL",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.0.0"
+  },
+  "dependencies": {
+    "electron-builder": "^24.2.0",
+    "electron-updater": "^5.3.0"
+  }
+}
