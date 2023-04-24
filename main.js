@@ -1,24 +1,44 @@
 const { app, BrowserWindow, Notification } = require('electron');
+const { autoUpdater } = require("electron-updater");
+const { log } = require("electron-log");
 
-const { autoUpdater } = require("electron-updater")
+require('update-electron-app');
 
-require('update-electron-app')();
 const path = require('path');
 const server = 'https://github.com/TLRazer/Auto-Update-test'
 const url = `${server}/update/${process.platform}/${app.getVersion()}`
+let win;
 
-//autoUpdater.setFeedURL({ url })
+Object.defineProperty(app, 'isPackaged', {
+  get() {
+    return true;
+  }
+});
+
+autoUpdater.logger = require("electron-log")
+autoUpdater.setFeedURL({
+  provider: 'github',
+  owner:'TLRazer',
+  repo: 'auto-update-test'
+});
+/*
+ autoUpdater.setFeedURL({
+  provider: 'github',
+  repo: server,
+  owner: 'TLRazer',
+  private: false
+ })
+*/
 
 setInterval(() => {
-  showNotification();
-  console.log(autoUpdater.checkForUpdates());
-}, 15000)
+  checkUpdate();
+}, 30000)
 
 //autoUpdater.autoDownload = false;
 //autoUpdater.autoInstallOnAppQuit = true;
 
 const createWindow = () => {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
       width: 800,
       height: 600,
       webPreferences: {
@@ -29,10 +49,16 @@ const createWindow = () => {
     win.loadFile('index.html');
   };
 
-  const NOTIFICATION_TITLE = 'Auto update version : ';
-  const NOTIFICATION_BODY = app.getVersion();
+  function checkUpdate(){
+    showNotification("Checking for updates...");
+    win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdatesAndNotify()+' ");');
+    console.log("Checking for updates : ");
+    //showNotification(autoUpdater.checkForUpdates());
+  }
 
-  function showNotification () {
+  function showNotification (message = app.getVersion()) {
+    let NOTIFICATION_TITLE = 'Auto update version : ';
+    let NOTIFICATION_BODY = message;
     new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
   }
 
@@ -43,7 +69,8 @@ const createWindow = () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
     });
 
-  }).then(showNotification);
+    checkUpdate();
+  });
 
 
   app.on('window-all-closed', () => {
@@ -51,20 +78,8 @@ const createWindow = () => {
   });
 
   autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    const dialogOpts = {
-      type: 'info',
-      buttons: ['Restart', 'Later'],
-      title: 'Application Update',
-      message: process.platform === 'win32' ? releaseNotes : releaseName,
-      detail:
-        'A new version has been downloaded. Restart the application to apply the updates.',
-    }
+    showNotification("New release has been downloaded!");
     autoUpdater.quitAndInstall();
-    showNotification();
-  
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-      if (returnValue.response === 0) autoUpdater.quitAndInstall()
-    })
   })
 
   autoUpdater.on('error', (message) => {
