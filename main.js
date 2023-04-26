@@ -18,7 +18,7 @@ Object.defineProperty(app, 'isPackaged', {
 const APP_PATH = app.getAppPath();
 
 autoUpdater.updateConfigPath = path.join(APP_PATH, 'resources\\app-update.yml');
-autoUpdater.addAuthHeader("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");
+autoUpdater.addAuthHeader("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");
 
 autoUpdater.logger = require("electron-log")
 autoUpdater.setFeedURL({
