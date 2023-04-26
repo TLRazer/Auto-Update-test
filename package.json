@@ -1,6 +1,6 @@
 {
   "name": "auto-update-test",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Auto updater test",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "release": "set GH_TOKEN=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 & electron-builder --win --publish always"
+    "release": "set GH_TOKEN=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 && electron-builder --win --publish always"
   },
   "build": {
     "appId": "autoupdate.interhaptics",
@@ -25,7 +25,15 @@
       ],
       "publish":[
         "github"
-      ]
+      ],
+      "nsis": {
+        "artifactName": "${productName}-Setup-${version}.${ext}",
+        "oneClick": true,
+        "perMachine": false,
+        "allowToChangeInstallationDirectory": false,
+        "runAfterFinish": true,
+        "deleteAppDataOnUninstall": true
+      }
     },
     "directories": {
       "output": "electron-build",
@@ -38,7 +46,7 @@
       "owner":"TLRazer",
       "repo":"auto-update-test",
       "private": false,
-      "token": "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"
+      "token": "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"
     }
   },
   "author": "ThomasL",
