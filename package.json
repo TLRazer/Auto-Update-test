@@ -25,15 +25,7 @@
       ],
       "publish":[
         "github"
-      ],
-      "nsis": {
-        "artifactName": "${productName}-Setup-${version}.${ext}",
-        "oneClick": true,
-        "perMachine": false,
-        "allowToChangeInstallationDirectory": false,
-        "runAfterFinish": true,
-        "deleteAppDataOnUninstall": true
-      }
+      ]
     },
     "directories": {
       "output": "electron-build",
