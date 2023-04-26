@@ -1,8 +1,8 @@
 const { app, BrowserWindow, Notification } = require('electron');
 const { autoUpdater } = require("electron-updater");
-const { log } = require("electron-log");
 
-require('update-electron-app');
+//const { log } = require("electron-log");
+//require('update-electron-app');
 
 const path = require('path');
 const server = 'https://github.com/TLRazer/Auto-Update-test'
@@ -21,14 +21,6 @@ autoUpdater.setFeedURL({
   owner:'TLRazer',
   repo: 'auto-update-test'
 });
-/*
- autoUpdater.setFeedURL({
-  provider: 'github',
-  repo: server,
-  owner: 'TLRazer',
-  private: false
- })
-*/
 
 setInterval(() => {
   checkUpdate();
@@ -52,12 +44,12 @@ const createWindow = () => {
   function checkUpdate(){
     showNotification("Checking for updates...");
     win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdatesAndNotify()+' ");');
+
     console.log("Checking for updates : ");
-    //showNotification(autoUpdater.checkForUpdates());
   }
 
   function showNotification (message = app.getVersion()) {
-    let NOTIFICATION_TITLE = 'Auto update version : ';
+    let NOTIFICATION_TITLE = 'Installed version : '+app.getVersion();
     let NOTIFICATION_BODY = message;
     new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
   }
@@ -83,6 +75,6 @@ const createWindow = () => {
   })
 
   autoUpdater.on('error', (message) => {
-    console.error('There was a problem updating the application')
-    console.error(message)
+    console.error('There was a problem updating the application');
+    console.error(message);
   })

@@ -1,6 +1,6 @@
 {
   "name": "auto-update-test",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Auto updater test",
   "main": "main.js",
   "scripts": {
@@ -8,28 +8,37 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "release": "electron-builder --win --publish always"
-  },
-  "repository": "https://github.com/TLRazer/Auto-Update-test",
-  "publish": {
-    "provider": "github",
-    "host": "github.com",
-    "releaseType": "release",
-    "private": false,
-    "token": "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"
+    "release": "set GH_TOKEN=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 & electron-builder --win --publish always"
   },
   "build": {
     "appId": "autoupdate.interhaptics",
     "productName": "Auto updater",
     "win": {
-      "target":"nsis",
-      "publish": [
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "publish":[
         "github"
       ]
     },
     "directories": {
       "output": "electron-build",
       "buildResources": "build-assets"
+    },
+    "publish": {
+      "provider": "github",
+      "host": "github.com",
+      "releaseType": "release",
+      "owner":"TLRazer",
+      "repo":"auto-update-test",
+      "private": false,
+      "token": "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"
     }
   },
   "author": "ThomasL",
