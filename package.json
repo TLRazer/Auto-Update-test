@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "release": "set GH_TOKEN=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 && electron-builder --win --publish always"
+    "release": "set GH_TOKEN=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 && electron-builder --win --publish always"
   },
   "build": {
     "appId": "autoupdate.interhaptics",
@@ -38,7 +38,7 @@
       "owner":"TLRazer",
       "repo":"auto-update-test",
       "private": false,
-      "token": "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"
+      "token": "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"
     }
   },
   "author": "ThomasL",
