@@ -15,6 +15,11 @@ Object.defineProperty(app, 'isPackaged', {
   }
 });
 
+const APP_PATH = app.getAppPath();
+
+autoUpdater.updateConfigPath = path.join(APP_PATH, 'resources\\app-update.yml');
+autoUpdater.addAuthHeader("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");
+
 autoUpdater.logger = require("electron-log")
 autoUpdater.setFeedURL({
   provider: 'github',
@@ -22,10 +27,11 @@ autoUpdater.setFeedURL({
   repo: 'auto-update-test'
 });
 
+/*
 setInterval(() => {
   checkUpdate();
 }, 30000)
-
+*/
 //autoUpdater.autoDownload = false;
 //autoUpdater.autoInstallOnAppQuit = true;
 
