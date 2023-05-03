@@ -48,7 +48,7 @@ const createWindow = () => {
   };
 
   function checkUpdate(){
-    showNotification("Checking for updates...");
+    showNotification("Path : "+ APP_PATH);
     win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdates()+' ");');
 
     console.log("Checking for updates : ");
@@ -75,12 +75,21 @@ const createWindow = () => {
     if (process.platform !== 'darwin') app.quit()
   });
 
+  autoUpdater.on('update-available', (event, releaseNotes, releaseName) => {
+    showNotification("A new version is available! Starting download.");
+  })
+
+  autoUpdater.on('update-not-available', (event, releaseNotes, releaseName) => {
+    showNotification("No new version available.");
+  })
+
   autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
     showNotification("New release has been downloaded!");
     autoUpdater.quitAndInstall();
   })
 
   autoUpdater.on('error', (message) => {
+    showNotification("There was a problem updating the application.");
     console.error('There was a problem updating the application');
     console.error(message);
   })
