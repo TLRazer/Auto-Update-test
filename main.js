@@ -17,8 +17,8 @@ Object.defineProperty(app, 'isPackaged', {
 
 const APP_PATH = app.getAppPath();
 
-autoUpdater.updateConfigPath = path.join(APP_PATH, 'resources\\app-update.yml');
-autoUpdater.addAuthHeader("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");
+autoUpdater.updateConfigPath = path.join(APP_PATH, 'electron-build\\win-unpacked\\resources\\app-update.yml');
+//autoUpdater.addAuthHeader("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");
 
 autoUpdater.logger = require("electron-log")
 autoUpdater.setFeedURL({
@@ -49,7 +49,7 @@ const createWindow = () => {
 
   function checkUpdate(){
     showNotification("Checking for updates...");
-    win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdatesAndNotify()+' ");');
+    win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdates()+' ");');
 
     console.log("Checking for updates : ");
   }
