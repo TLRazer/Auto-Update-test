@@ -17,7 +17,7 @@ Object.defineProperty(app, 'isPackaged', {
 
 const APP_PATH = app.getAppPath();
 
-autoUpdater.updateConfigPath = path.join(APP_PATH, 'app-update.yml');    //Packaged directory
+autoUpdater.updateConfigPath = path.join(APP_PATH, '..\\app-update.yml');                                         //Packaged directory
 //autoUpdater.updateConfigPath = path.join(APP_PATH, 'electron-build\\win-unpacked\\resources\\app-update.yml');  //Testing directory
 //autoUpdater.addAuthHeader("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");
 
@@ -28,13 +28,8 @@ autoUpdater.setFeedURL({
   repo: 'auto-update-test'
 });
 
-/*
-setInterval(() => {
-  checkUpdate();
-}, 30000)
-*/
-//autoUpdater.autoDownload = false;
-//autoUpdater.autoInstallOnAppQuit = true;
+//autoUpdater.autoDownload = false;           // Does CheckForUpdates automatically download the new version?
+//autoUpdater.autoInstallOnAppQuit = true;    // Does the new versino automatically install when the app is closed?
 
 const createWindow = () => {
     win = new BrowserWindow({
@@ -49,10 +44,7 @@ const createWindow = () => {
   };
 
   function checkUpdate(){
-    showNotification("Path : "+ APP_PATH);
     win.webContents.executeJavaScript('console.log("Checking for updates : '+autoUpdater.checkForUpdates()+' ");');
-
-    console.log("Checking for updates : ");
   }
 
   function showNotification (message = app.getVersion()) {
