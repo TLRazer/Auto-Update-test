@@ -17,8 +17,8 @@ Object.defineProperty(app, 'isPackaged', {
 
 const APP_PATH = app.getAppPath();
 
-autoUpdater.updateConfigPath = path.join(APP_PATH, '..\\app-update.yml');                                         //Packaged directory
-//autoUpdater.updateConfigPath = path.join(APP_PATH, 'electron-build\\win-unpacked\\resources\\app-update.yml');  //Testing directory
+//autoUpdater.updateConfigPath = path.join(APP_PATH, '..\\app-update.yml');                                         //Packaged directory
+autoUpdater.updateConfigPath = path.join(APP_PATH, 'electron-build\\win-unpacked\\resources\\app-update.yml');  //Testing directory
 //autoUpdater.addAuthHeader("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");
 
 autoUpdater.logger = require("electron-log")
